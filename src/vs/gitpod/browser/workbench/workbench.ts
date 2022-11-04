@@ -31,6 +31,7 @@ import { defaultWebSocketFactory } from 'vs/platform/remote/browser/browserSocke
 import { RemoteAuthorityResolverError, RemoteAuthorityResolverErrorCode } from 'vs/platform/remote/common/remoteAuthorityResolver';
 import { extractLocalHostUriMetaDataForPortMapping, isLocalhost, TunnelPrivacyId } from 'vs/platform/tunnel/common/tunnel';
 import { ColorScheme } from 'vs/platform/theme/common/theme';
+import type { TunnelOptions } from 'vscode';
 
 const loadingGrpc = import('@improbable-eng/grpc-web');
 const loadingLocalApp = (async () => {
@@ -730,8 +731,8 @@ async function doStart(): Promise<IDisposable> {
 									commands.executeCommand('gitpod.vscode.workspace.openTunnel', {
 										remoteAddress: tunnel.remoteAddress,
 										localAddressPort: tunnel.remoteAddress.port,
-										public: tunnel.privacy
-									});
+										privacy: tunnel.privacy
+									} as TunnelOptions);
 									notify = true;
 								}
 							}
